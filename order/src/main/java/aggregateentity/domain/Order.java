@@ -16,141 +16,23 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 //<<< DDD / Aggregate Root
 public class Order  {
-
-
-    
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    
-    
-    
-private Long id;    
-    
-    
-    
-private String userId;    
-    
-    
-    
-private Integer qty;    
-    
-    
+    private Long id;    
+        
+    private String userId;    
+        
+    private Integer qty;    
+        
     @Embedded
-private InventoryId inventoryId;    
-    
-    
+    private InventoryId inventoryId;    
+        
     @Enumerated(EnumType.STRING)
-private OrderStatus orderStatus;    
-    
-    
+    private OrderStatus orderStatus;    
+        
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-private List<OrderItem> orderItems = new java.util.ArrayList<>();
-    public void addOrderStatus() {
-        OrderStatus orderStatus = new OrderStatus(, this);
-        orderStatus.add(orderStatus);
-    }
-
-    public List<OrderStatus> getOrderStatus() {
-        return Collections.unmodifiableList(orderStatus);
-    }
-
-    public void updateOrderStatus() {
-        for (OrderStatus item : orderStatus) {
-            if (item.) {
-                item.update();
-                break;
-            }
-        }
-    }
-
-    public void removeOrderStatus(OrderStatus orderStatus) {
-        orderStatus.remove(orderStatus);
-    }
-    public void addOrderStatus() {
-        OrderStatus orderStatus = new OrderStatus(, this);
-        orderStatus.add(orderStatus);
-    }
-
-    public List<OrderStatus> getOrderStatus() {
-        return Collections.unmodifiableList(orderStatus);
-    }
-
-    public void updateOrderStatus() {
-        for (OrderStatus item : orderStatus) {
-            if (item.) {
-                item.update();
-                break;
-            }
-        }
-    }
-
-    public void removeOrderStatus(OrderStatus orderStatus) {
-        orderStatus.remove(orderStatus);
-    }
-    public void addOrderItem(String productName, Double price) {
-        OrderItem orderItem = new OrderItem(productName, price, this);
-        orderItems.add(orderItem);
-    }
-
-    public List<OrderItem> getOrderItems() {
-        return Collections.unmodifiableList(orderItems);
-    }
-
-    public void updateOrderItem(Long id, String productName, Double price) {
-        for (OrderItem item : orderItems) {
-            if (item.getId().equals(id)) {
-                item.update(productName, price);
-                break;
-            }
-        }
-    }
-
-    public void removeOrderItem(OrderItem orderItem) {
-        orderItems.remove(orderItem);
-    }
-    public void addOrderStatus() {
-        OrderStatus orderStatus = new OrderStatus(, this);
-        orderStatus.add(orderStatus);
-    }
-
-    public List<OrderStatus> getOrderStatus() {
-        return Collections.unmodifiableList(orderStatus);
-    }
-
-    public void updateOrderStatus() {
-        for (OrderStatus item : orderStatus) {
-            if (item.) {
-                item.update();
-                break;
-            }
-        }
-    }
-
-    public void removeOrderStatus(OrderStatus orderStatus) {
-        orderStatus.remove(orderStatus);
-    }
-    public void addOrderStatus() {
-        OrderStatus orderStatus = new OrderStatus(, this);
-        orderStatus.add(orderStatus);
-    }
-
-    public List<OrderStatus> getOrderStatus() {
-        return Collections.unmodifiableList(orderStatus);
-    }
-
-    public void updateOrderStatus() {
-        for (OrderStatus item : orderStatus) {
-            if (item.) {
-                item.update();
-                break;
-            }
-        }
-    }
-
-    public void removeOrderStatus(OrderStatus orderStatus) {
-        orderStatus.remove(orderStatus);
-    }
+    private List<OrderItem> orderItems = new java.util.ArrayList<>();
+    
     public void addOrderItem(String productName, Double price) {
         OrderItem orderItem = new OrderItem(productName, price, this);
         orderItems.add(orderItem);
@@ -181,7 +63,7 @@ private List<OrderItem> orderItems = new java.util.ArrayList<>();
 
 
 
-//<<< Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
     public void placeOrder(PlaceOrderCommand placeOrderCommand){
         
         //implement business logic here:
@@ -191,20 +73,16 @@ private List<OrderItem> orderItems = new java.util.ArrayList<>();
         OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
     }
-//>>> Clean Arch / Port Method
-//<<< Clean Arch / Port Method
+    //>>> Clean Arch / Port Method
+    //<<< Clean Arch / Port Method
     public void cancelOrder(CancelOrderCommand cancelOrderCommand){
         
         //implement business logic here:
-        
 
 
         OrderCanceled orderCanceled = new OrderCanceled(this);
         orderCanceled.publishAfterCommit();
     }
-//>>> Clean Arch / Port Method
-
-
-
+    //>>> Clean Arch / Port Method
 }
 //>>> DDD / Aggregate Root
