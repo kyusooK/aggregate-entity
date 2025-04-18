@@ -1,7 +1,7 @@
 # 
 
 ## Model
-www.msaez.io/#/123912988/storming/lab-shop-aggregate-entity
+www.msaez.io/#/courses/cna-full/ffc64ff0-048a-11f0-8291-b1a736e58d32/dev-aggregaate-design
 
 ## Before Running Services
 ### Make sure there is a Kafka server running

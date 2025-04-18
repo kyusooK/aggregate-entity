@@ -18,6 +18,24 @@
                 <v-btn :disabled="!selectedRow" style="margin-left: 5px;" @click="openEditDialog()" class="contrast-primary-text" small color="primary">
                     <v-icon small>mdi-pencil</v-icon>수정
                 </v-btn>
+                <v-btn style="margin-left: 5px;" @click="placeOrderDialog = true" class="contrast-primary-text" small color="primary" >
+                    <v-icon small>mdi-minus-circle-outline</v-icon>place order
+                </v-btn>
+                <v-dialog v-model="placeOrderDialog" width="500">
+                    <PlaceOrder
+                        @closeDialog="placeOrderDialog = false"
+                        @placeOrder="placeOrder"
+                    ></PlaceOrder>
+                </v-dialog>
+                <v-btn :disabled="!selectedRow" style="margin-left: 5px;" @click="cancelOrderDialog = true" class="contrast-primary-text" small color="primary" :disabled="!hasRole('customer')">
+                    <v-icon small>mdi-minus-circle-outline</v-icon>cancel order
+                </v-btn>
+                <v-dialog v-model="cancelOrderDialog" width="500">
+                    <CancelOrder
+                        @closeDialog="cancelOrderDialog = false"
+                        @cancelOrder="cancelOrder"
+                    ></CancelOrder>
+                </v-dialog>
             </div>
             <div class="mb-5 text-lg font-bold"></div>
             <div class="table-responsive">
@@ -154,10 +172,44 @@ export default {
     },
     data: () => ({
         path: 'orders',
+        placeOrderDialog: false,
+        cancelOrderDialog: false,
     }),
     watch: {
     },
     methods:{
+        async placeOrder(params){
+            try{
+                var path = "placeOrder".toLowerCase();
+                var temp = await this.repository.invoke(this.selectedRow, path, params)
+                // 스넥바 관련 수정 필요
+                // this.$EventBus.$emit('show-success','place order 성공적으로 처리되었습니다.')
+                for(var i = 0; i< this.value.length; i++){
+                    if(this.value[i] == this.selectedRow){
+                        this.value[i] = temp.data
+                    }
+                }
+                this.placeOrderDialog = false
+            }catch(e){
+                console.log(e)
+            }
+        },
+        async cancelOrder(params){
+            try{
+                var path = "cancelOrder".toLowerCase();
+                var temp = await this.repository.invoke(this.selectedRow, path, params)
+                // 스넥바 관련 수정 필요
+                // this.$EventBus.$emit('show-success','cancel order 성공적으로 처리되었습니다.')
+                for(var i = 0; i< this.value.length; i++){
+                    if(this.value[i] == this.selectedRow){
+                        this.value[i] = temp.data
+                    }
+                }
+                this.cancelOrderDialog = false
+            }catch(e){
+                console.log(e)
+            }
+        },
     }
 }
 
