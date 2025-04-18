@@ -44,10 +44,6 @@ private InventoryId inventoryId;
 private OrderStatus orderStatus;    
     
     
-    @Embedded
-private Address address;    
-    
-    
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
 private List<OrderItem> orderItems = new java.util.ArrayList<>();
     public void addOrderStatus() {

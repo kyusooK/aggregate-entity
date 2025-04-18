@@ -33,7 +33,7 @@ mvn spring-boot:run
 ## Test by API
 - order
 ```
- http :8088/orders id="id"userId="userId"qty="qty"InventoryId := '{"id": 0}'OrderStatus = "ORDERPLACED"Address := '{"state": state, "city": city, "district": district, "street": street}'
+ http :8088/orders id="id"userId="userId"qty="qty"InventoryId := '{"id": 0}'OrderStatus = "ORDERPLACED"
 ```
 - inventory
 ```

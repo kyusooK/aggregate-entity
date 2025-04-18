@@ -44,13 +44,6 @@
             :editMode="editMode"
             @change="change"
         />
-        <Address
-            offline
-            label="Address"
-            v-model="value.address"
-            :editMode="editMode"
-            @change="change"
-        />
         <v-row class="ma-0 pa-0">
             <v-spacer></v-spacer>
             <v-btn width="64px" color="primary" @click="save">

@@ -47,7 +47,6 @@
                         <th>Qty</th>
                         <th>inventoryId</th>
                         <th>OrderStatus</th>
-                        <th>Address</th>
                         <th>OrderItems</th>
                         <th>Inventory</th>
                         </tr>
@@ -62,9 +61,6 @@
                             <td class="whitespace-nowrap" label="UserId">{{ val.userId }}</td>
                             <td class="whitespace-nowrap" label="Qty">{{ val.qty }}</td>
                             <td class="whitespace-nowrap" label="OrderStatus">{{ val.orderStatus }}</td>
-                            <td class="whitespace-nowrap" label="Address">
-                                <Address :editMode="false" :inList="true" v-model="val.address"></Address>
-                            </td>
                             <td class="whitespace-nowrap" label="OrderItems">
                                 <span v-for="(name, index) in val.orderItems" :key="index">
                                     {{ name }}<br>
@@ -139,7 +135,6 @@
                             <Number label="Qty" v-model="selectedRow.qty" :editMode="true"/>
                             <InventoryId offline label="inventoryId" v-model="selectedRow.inventoryId" :editMode="true"/>
                             <OrderStatus offline label="OrderStatus" v-model="selectedRow.orderStatus" :editMode="true"/>
-                            <Address offline label="Address" v-model="selectedRow.address" :editMode="true"/>
                             <OrderItemDetailGrid label="OrderItems" offline v-model="selectedRow.orderItems" :editMode="true"/>
                             <v-divider class="border-opacity-100 my-divider"></v-divider>
                             <v-layout row justify-end>
