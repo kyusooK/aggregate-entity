@@ -97,17 +97,17 @@ public class Order  {
         repository().findById(this.getId()).ifPresent(order -> {
             // ModifyOrderCommand에서 전달받은 orderItems가 null이 아닌 경우에만 처리
             if (modifyOrderCommand.getOrderItems() != null) {
-                // 각 OrderItem에 대해 수정 작업 수행
+                // 기존 orderItems를 모두 제거
+                order.getOrderItems().clear();
+                
+                // 새로운 orderItems 추가
                 for (OrderItem item : modifyOrderCommand.getOrderItems()) {
-                    // 기존 updateOrderItem 메서드를 사용하여 각 항목 수정
-                    order.updateOrderItem(item.getId(), item.getProductName(), item.getPrice());
+                    order.addOrderItem(item.getProductName(), item.getPrice());
                 }
             }
             
             repository().save(order);
         });
-        OrderModified orderModified = new OrderModified(order);
-        orderModified.publishAfterCommit();
     } 
     //>>> Clean Arch / Port Method
 }

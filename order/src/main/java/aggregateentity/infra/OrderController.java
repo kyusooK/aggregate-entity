@@ -38,7 +38,7 @@ public class OrderController {
     }
 
     @RequestMapping(
-        value = "/orders/{id}/cancelorder",
+        value = "/orders/{id}/modifyorder",
         method = RequestMethod.PUT,
         produces = "application/json;charset=UTF-8"
     )
