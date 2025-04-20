@@ -38,21 +38,5 @@ public class PolicyHandler {
         // Sample Logic //
         Inventory.decreaseStock(event);
     }
-
-    @StreamListener(
-        value = KafkaProcessor.INPUT,
-        condition = "headers['type']=='OrderCanceled'"
-    )
-    public void wheneverOrderCanceled_IncreaseStock(
-        @Payload OrderCanceled orderCanceled
-    ) {
-        OrderCanceled event = orderCanceled;
-        System.out.println(
-            "\n\n##### listener IncreaseStock : " + orderCanceled + "\n\n"
-        );
-
-        // Sample Logic //
-        Inventory.increaseStock(event);
-    }
 }
 //>>> Clean Arch / Inbound Adaptor

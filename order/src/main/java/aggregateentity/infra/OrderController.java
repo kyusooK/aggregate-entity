@@ -42,18 +42,18 @@ public class OrderController {
         method = RequestMethod.PUT,
         produces = "application/json;charset=UTF-8"
     )
-    public Order cancelOrder(
+    public Order modifyOrder(
         @PathVariable(value = "id") Long id,
-        @RequestBody CancelOrderCommand cancelOrderCommand,
+        @RequestBody ModifyOrderCommand modifyOrderCommand,
         HttpServletRequest request,
         HttpServletResponse response
     ) throws Exception {
-        System.out.println("##### /order/cancelOrder  called #####");
+        System.out.println("##### /order/modifyOrder  called #####");
         Optional<Order> optionalOrder = orderRepository.findById(id);
 
         optionalOrder.orElseThrow(() -> new Exception("No Entity Found"));
         Order order = optionalOrder.get();
-        order.cancelOrder(cancelOrderCommand);
+        order.modifyOrder(modifyOrderCommand);
 
         orderRepository.save(order);
         return order;

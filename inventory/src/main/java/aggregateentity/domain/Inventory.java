@@ -63,39 +63,6 @@ public class Inventory {
         */
 
     }
-
-    //>>> Clean Arch / Port Method
-    //<<< Clean Arch / Port Method
-    public static void increaseStock(OrderCanceled orderCanceled) {
-        //implement business logic here:
-
-        /** Example 1:  new item 
-        Inventory inventory = new Inventory();
-        repository().save(inventory);
-
-        StockIncreased stockIncreased = new StockIncreased(inventory);
-        stockIncreased.publishAfterCommit();
-        */
-
-        /** Example 2:  finding and process
-        
-        // if orderCanceled.inventoryId exists, use it
-        
-        // ObjectMapper mapper = new ObjectMapper();
-        // Map<Long, Object> orderMap = mapper.convertValue(orderCanceled.getInventoryId(), Map.class);
-
-        repository().findById(orderCanceled.get???()).ifPresent(inventory->{
-            
-            inventory // do something
-            repository().save(inventory);
-
-            StockIncreased stockIncreased = new StockIncreased(inventory);
-            stockIncreased.publishAfterCommit();
-
-         });
-        */
-
-    }
     //>>> Clean Arch / Port Method
 
 }

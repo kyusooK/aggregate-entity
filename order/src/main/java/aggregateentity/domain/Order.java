@@ -1,5 +1,6 @@
 package aggregateentity.domain;
 
+import aggregateentity.domain.OrderModified;
 import aggregateentity.OrderApplication;
 import javax.persistence.*;
 import java.util.List;
@@ -173,6 +174,15 @@ private List<OrderItem> orderItems = new java.util.ArrayList<>();
         orderItems.remove(orderItem);
     }
 
+    @PostPersist
+    public void onPostPersist(){
+
+
+        OrderModified orderModified = new OrderModified(this);
+        orderModified.publishAfterCommit();
+
+    
+    }
 
     public static OrderRepository repository(){
         OrderRepository orderRepository = OrderApplication.applicationContext.getBean(OrderRepository.class);
@@ -193,14 +203,12 @@ private List<OrderItem> orderItems = new java.util.ArrayList<>();
     }
 //>>> Clean Arch / Port Method
 //<<< Clean Arch / Port Method
-    public void cancelOrder(CancelOrderCommand cancelOrderCommand){
+    public void modifyOrder(ModifyOrderCommand modifyOrderCommand){
         
         //implement business logic here:
         
 
 
-        OrderCanceled orderCanceled = new OrderCanceled(this);
-        orderCanceled.publishAfterCommit();
     }
 //>>> Clean Arch / Port Method
 
