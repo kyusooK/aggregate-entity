@@ -94,7 +94,7 @@ public class Order  {
             // ModifyOrderCommand에서 전달받은 orderItems가 null이 아닌 경우에만 처리
             if (modifyOrderCommand.getOrderItems() != null) {
                 // 기존 orderItems를 모두 제거
-                order.getOrderItems().clear();
+                order.orderItems.clear();
                 
                 // 새로운 orderItems 추가
                 for (OrderItem item : modifyOrderCommand.getOrderItems()) {
