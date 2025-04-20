@@ -90,15 +90,17 @@ public class Order  {
         OrderPlaced orderPlaced = new OrderPlaced(order);
         orderPlaced.publishAfterCommit();
     }
-    public void cancelOrder(CancelOrderCommand cancelOrderCommand){
-        // OrderRepository를 통해 현재 주문 ID로 데이터베이스에서 주문 조회
+//>>> Clean Arch / Port Method
+//<<< Clean Arch / Port Method
+    public void modifyOrder(ModifyOrderCommand modifyOrderCommand){
+        
         repository().findById(this.getId()).ifPresent(order -> {
-            order.setOrderStatus(cancelOrderCommand.getOrderStatus());
+            
             repository().save(order);
         });
-    
-        OrderCanceled orderCanceled = new OrderCanceled(this);
-        orderCanceled.publishAfterCommit();
+        
+
+
     }
     //>>> Clean Arch / Port Method
 }
