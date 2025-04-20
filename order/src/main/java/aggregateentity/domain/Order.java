@@ -69,27 +69,23 @@ public class Order  {
 
     //<<< Clean Arch / Port Method
     public void placeOrder(PlaceOrderCommand placeOrderCommand){
-    
-        // 새 Order 객체 생성
-        Order order = new Order();
-        
-        // placeOrderCommand에서 값을 가져와 설정
-        order.setUserId(placeOrderCommand.getUserId());
-        order.setQty(placeOrderCommand.getQty());
-        order.setInventoryId(placeOrderCommand.getInventoryId());
-        order.setOrderStatus(placeOrderCommand.getOrderStatus());
+    // 현재 Order 객체에 직접 값을 설정
+        this.setUserId(placeOrderCommand.getUserId());
+        this.setQty(placeOrderCommand.getQty());
+        this.setInventoryId(placeOrderCommand.getInventoryId());
+        this.setOrderStatus(placeOrderCommand.getOrderStatus());
         
         if (placeOrderCommand.getOrderItems() != null) {
             for (OrderItem item : placeOrderCommand.getOrderItems()) {
-                // OrderItem의 추가를 위해 Order.java의 addOrderItem() 호출
-                order.addOrderItem(item.getProductName(), item.getPrice());
+                this.addOrderItem(item.getProductName(), item.getPrice());
             }
         }
-        repository().save(order);
-    
-        OrderPlaced orderPlaced = new OrderPlaced(order);
+        
+        repository().save(this);
+
+        OrderPlaced orderPlaced = new OrderPlaced(this);
         orderPlaced.publishAfterCommit();
-    }
+    } 
 //>>> Clean Arch / Port Method
 //<<< Clean Arch / Port Method
     public void modifyOrder(ModifyOrderCommand modifyOrderCommand){
