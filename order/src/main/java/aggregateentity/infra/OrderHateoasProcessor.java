@@ -19,8 +19,8 @@ public class OrderHateoasProcessor
         );
         model.add(
             Link
-                .of(model.getRequiredLink("self").getHref() + "/cancelorder")
-                .withRel("cancelorder")
+                .of(model.getRequiredLink("self").getHref() + "/modifyorder")
+                .withRel("modifyorder")
         );
 
         return model;

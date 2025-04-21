@@ -1,6 +1,5 @@
 package aggregateentity.domain;
 
-import aggregateentity.domain.OrderModified;
 import aggregateentity.OrderApplication;
 import javax.persistence.*;
 import java.util.List;
@@ -33,10 +32,6 @@ private Long id;
 private String userId;    
     
     
-    
-private Integer qty;    
-    
-    
     @Embedded
 private InventoryId inventoryId;    
     
@@ -46,143 +41,138 @@ private OrderStatus orderStatus;
     
     
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-private List<OrderItem> orderItems = new java.util.ArrayList<>();
-    public void addOrderStatus() {
-        OrderStatus orderStatus = new OrderStatus(, this);
-        orderStatus.add(orderStatus);
-    }
-
-    public List<OrderStatus> getOrderStatus() {
-        return Collections.unmodifiableList(orderStatus);
-    }
-
-    public void updateOrderStatus() {
-        for (OrderStatus item : orderStatus) {
-            if (item.) {
-                item.update();
-                break;
-            }
-        }
-    }
-
-    public void removeOrderStatus(OrderStatus orderStatus) {
-        orderStatus.remove(orderStatus);
-    }
-    public void addOrderStatus() {
-        OrderStatus orderStatus = new OrderStatus(, this);
-        orderStatus.add(orderStatus);
-    }
-
-    public List<OrderStatus> getOrderStatus() {
-        return Collections.unmodifiableList(orderStatus);
-    }
-
-    public void updateOrderStatus() {
-        for (OrderStatus item : orderStatus) {
-            if (item.) {
-                item.update();
-                break;
-            }
-        }
-    }
-
-    public void removeOrderStatus(OrderStatus orderStatus) {
-        orderStatus.remove(orderStatus);
-    }
-    public void addOrderItem(String productName, Double price) {
-        OrderItem orderItem = new OrderItem(productName, price, this);
-        orderItems.add(orderItem);
-    }
-
-    public List<OrderItem> getOrderItems() {
-        return Collections.unmodifiableList(orderItems);
-    }
-
-    public void updateOrderItem(Long id, String productName, Double price) {
-        for (OrderItem item : orderItems) {
-            if (item.getId().equals(id)) {
-                item.update(productName, price);
-                break;
-            }
-        }
-    }
-
-    public void removeOrderItem(OrderItem orderItem) {
-        orderItems.remove(orderItem);
-    }
-    public void addOrderStatus() {
-        OrderStatus orderStatus = new OrderStatus(, this);
-        orderStatus.add(orderStatus);
-    }
-
-    public List<OrderStatus> getOrderStatus() {
-        return Collections.unmodifiableList(orderStatus);
-    }
-
-    public void updateOrderStatus() {
-        for (OrderStatus item : orderStatus) {
-            if (item.) {
-                item.update();
-                break;
-            }
-        }
-    }
-
-    public void removeOrderStatus(OrderStatus orderStatus) {
-        orderStatus.remove(orderStatus);
-    }
-    public void addOrderStatus() {
-        OrderStatus orderStatus = new OrderStatus(, this);
-        orderStatus.add(orderStatus);
-    }
-
-    public List<OrderStatus> getOrderStatus() {
-        return Collections.unmodifiableList(orderStatus);
-    }
-
-    public void updateOrderStatus() {
-        for (OrderStatus item : orderStatus) {
-            if (item.) {
-                item.update();
-                break;
-            }
-        }
-    }
-
-    public void removeOrderStatus(OrderStatus orderStatus) {
-        orderStatus.remove(orderStatus);
-    }
-    public void addOrderItem(String productName, Double price) {
-        OrderItem orderItem = new OrderItem(productName, price, this);
-        orderItems.add(orderItem);
-    }
-
-    public List<OrderItem> getOrderItems() {
-        return Collections.unmodifiableList(orderItems);
-    }
-
-    public void updateOrderItem(Long id, String productName, Double price) {
-        for (OrderItem item : orderItems) {
-            if (item.getId().equals(id)) {
-                item.update(productName, price);
-                break;
-            }
-        }
-    }
-
-    public void removeOrderItem(OrderItem orderItem) {
-        orderItems.remove(orderItem);
-    }
-
-    @PostPersist
-    public void onPostPersist(){
-
-
-        OrderModified orderModified = new OrderModified(this);
-        orderModified.publishAfterCommit();
-
+private List<OrderItem> orderItems = new java.util.ArrayList<>();    
     
+    
+    
+private Date orderDate;
+    public void addOrderStatus() {
+        OrderStatus orderStatus = new OrderStatus(, this);
+        orderStatus.add(orderStatus);
     }
+
+    public List<OrderStatus> getOrderStatus() {
+        return Collections.unmodifiableList(orderStatus);
+    }
+
+    public void updateOrderStatus() {
+        for (OrderStatus item : orderStatus) {
+            if (item.) {
+                item.update();
+                break;
+            }
+        }
+    }
+
+    public void removeOrderStatus(OrderStatus orderStatus) {
+        orderStatus.remove(orderStatus);
+    }
+    public void addOrderStatus() {
+        OrderStatus orderStatus = new OrderStatus(, this);
+        orderStatus.add(orderStatus);
+    }
+
+    public List<OrderStatus> getOrderStatus() {
+        return Collections.unmodifiableList(orderStatus);
+    }
+
+    public void updateOrderStatus() {
+        for (OrderStatus item : orderStatus) {
+            if (item.) {
+                item.update();
+                break;
+            }
+        }
+    }
+
+    public void removeOrderStatus(OrderStatus orderStatus) {
+        orderStatus.remove(orderStatus);
+    }
+    public void addOrderItem(String productName, Integer qty, Double price) {
+        OrderItem orderItem = new OrderItem(productName, qty, price, this);
+        orderItems.add(orderItem);
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return Collections.unmodifiableList(orderItems);
+    }
+
+    public void updateOrderItem(Long id, String productName, Integer qty, Double price) {
+        for (OrderItem item : orderItems) {
+            if (item.getId().equals(id)) {
+                item.update(productName, qty, price);
+                break;
+            }
+        }
+    }
+
+    public void removeOrderItem(OrderItem orderItem) {
+        orderItems.remove(orderItem);
+    }
+    public void addOrderStatus() {
+        OrderStatus orderStatus = new OrderStatus(, this);
+        orderStatus.add(orderStatus);
+    }
+
+    public List<OrderStatus> getOrderStatus() {
+        return Collections.unmodifiableList(orderStatus);
+    }
+
+    public void updateOrderStatus() {
+        for (OrderStatus item : orderStatus) {
+            if (item.) {
+                item.update();
+                break;
+            }
+        }
+    }
+
+    public void removeOrderStatus(OrderStatus orderStatus) {
+        orderStatus.remove(orderStatus);
+    }
+    public void addOrderStatus() {
+        OrderStatus orderStatus = new OrderStatus(, this);
+        orderStatus.add(orderStatus);
+    }
+
+    public List<OrderStatus> getOrderStatus() {
+        return Collections.unmodifiableList(orderStatus);
+    }
+
+    public void updateOrderStatus() {
+        for (OrderStatus item : orderStatus) {
+            if (item.) {
+                item.update();
+                break;
+            }
+        }
+    }
+
+    public void removeOrderStatus(OrderStatus orderStatus) {
+        orderStatus.remove(orderStatus);
+    }
+    public void addOrderItem(String productName, Integer qty, Double price) {
+        OrderItem orderItem = new OrderItem(productName, qty, price, this);
+        orderItems.add(orderItem);
+    }
+
+    public List<OrderItem> getOrderItems() {
+        return Collections.unmodifiableList(orderItems);
+    }
+
+    public void updateOrderItem(Long id, String productName, Integer qty, Double price) {
+        for (OrderItem item : orderItems) {
+            if (item.getId().equals(id)) {
+                item.update(productName, qty, price);
+                break;
+            }
+        }
+    }
+
+    public void removeOrderItem(OrderItem orderItem) {
+        orderItems.remove(orderItem);
+    }
+
 
     public static OrderRepository repository(){
         OrderRepository orderRepository = OrderApplication.applicationContext.getBean(OrderRepository.class);
@@ -209,6 +199,8 @@ private List<OrderItem> orderItems = new java.util.ArrayList<>();
         
 
 
+        OrderModified orderModified = new OrderModified(this);
+        orderModified.publishAfterCommit();
     }
 //>>> Clean Arch / Port Method
 

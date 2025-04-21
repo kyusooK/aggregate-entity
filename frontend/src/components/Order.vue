@@ -5,11 +5,6 @@
             v-model="value.userId"
             :editMode="editMode"
         />
-        <Number
-            label="Qty"
-            v-model="value.qty"
-            :editMode="editMode"
-        />
         <div variant="outlined" class="my-2">
             <OrderItems v-model="orderItemsInput"
                 offline
@@ -30,6 +25,11 @@
                 </li>
             </v-card>
         </div>
+        <Date
+            label="OrderDate"
+            v-model="value.orderDate"
+            :editMode="editMode"
+        />
         <InventoryId
             offline
             label="inventoryId"

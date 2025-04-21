@@ -17,6 +17,8 @@ public class OrderItem {
 
     private String productName;
 
+    private Integer qty;
+
     private Double price;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -25,14 +27,24 @@ public class OrderItem {
 
     protected OrderItem() {}
 
-    protected OrderItem(String productName, Double price, Order order) {
+    protected OrderItem(
+        String productName,
+        Integer qty,
+        Double price,
+        Order order
+    ) {
         this.productName = productName;
+        this.qty = qty;
         this.price = price;
         this.order = order;
     }
 
     public String getProductName() {
         return productName;
+    }
+
+    public Integer getQty() {
+        return qty;
     }
 
     public Double getPrice() {
