@@ -87,13 +87,36 @@ public class Order  {
 //<<< Clean Arch / Port Method
     public void modifyOrder(ModifyOrderCommand modifyOrderCommand){
         repository().findById(this.getId()).ifPresent(order -> {
-            // ModifyOrderCommand에서 전달받은 orderItems가 null이 아닌 경우에만 처리
             if (modifyOrderCommand.getOrderItems() != null) {
-                // 수정된 OrderItem만 업데이트 (ID가 있는 항목만 처리)
-                for (OrderItem newItem : modifyOrderCommand.getOrderItems()) {
-                    if (newItem.getId() != null) {
-                        // 기존 항목 중 ID가 있으면 업데이트
-                        order.updateOrderItem(newItem.getId(), newItem.getProductName(), newItem.getQty(), newItem.getPrice());
+                // 새로운 항목 목록
+                List<OrderItem> newItems = modifyOrderCommand.getOrderItems();
+                // 기존 항목을 복사 (removeOrderItem이 순회 중 컬렉션을 수정하는 문제를 방지)
+                List<OrderItem> existingItems = new java.util.ArrayList<>(order.orderItems);
+                // 기존 항목 처리
+                for (OrderItem existingItem : existingItems) {
+                    boolean found = false;
+                    for (OrderItem newItem : newItems) {
+                        if (newItem.getId() != null && newItem.getId().equals(existingItem.getId())) {
+                            // 기존 항목 업데이트 (updateOrderItem 메소드 사용)
+                            order.updateOrderItem(existingItem.getId(), 
+                                            newItem.getProductName(), 
+                                            newItem.getQty(), 
+                                            newItem.getPrice());
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        // 새 목록에 없는 항목은 제거 (removeOrderItem 메소드 사용)
+                        order.removeOrderItem(existingItem);
+                    }
+                }
+                // 새로운 항목 추가 (addOrderItem 메소드 사용)
+                for (OrderItem newItem : newItems) {
+                    if (newItem.getId() == null) {
+                        order.addOrderItem(newItem.getProductName(), 
+                                        newItem.getQty(), 
+                                        newItem.getPrice());
                     }
                 }
             }
