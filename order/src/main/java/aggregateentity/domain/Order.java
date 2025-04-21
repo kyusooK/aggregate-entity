@@ -90,14 +90,14 @@ public class Order  {
             if (modifyOrderCommand.getOrderItems() != null) {
                 // 새로운 항목 목록
                 List<OrderItem> newItems = modifyOrderCommand.getOrderItems();
-                // 기존 항목을 복사 (removeOrderItem이 순회 중 컬렉션을 수정하는 문제를 방지)
+                // 기존 항목을 복사 (순회 중 컬렉션을 수정하는 문제를 방지)
                 List<OrderItem> existingItems = new java.util.ArrayList<>(order.orderItems);
                 // 기존 항목 처리
                 for (OrderItem existingItem : existingItems) {
                     boolean found = false;
                     for (OrderItem newItem : newItems) {
                         if (newItem.getId() != null && newItem.getId().equals(existingItem.getId())) {
-                            // 기존 항목 업데이트 (updateOrderItem 메소드 사용)
+                            // 기존 항목 업데이트
                             order.updateOrderItem(existingItem.getId(), 
                                             newItem.getProductName(), 
                                             newItem.getQty(), 
@@ -107,11 +107,11 @@ public class Order  {
                         }
                     }
                     if (!found) {
-                        // 새 목록에 없는 항목은 제거 (removeOrderItem 메소드 사용)
+                        // 새 목록에 없는 항목은 제거
                         order.removeOrderItem(existingItem);
                     }
                 }
-                // 새로운 항목 추가 (addOrderItem 메소드 사용)
+                // 새로운 항목 추가
                 for (OrderItem newItem : newItems) {
                     if (newItem.getId() == null) {
                         order.addOrderItem(newItem.getProductName(), 
