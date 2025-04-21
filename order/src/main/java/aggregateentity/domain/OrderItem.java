@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 import lombok.Data;
 import org.springframework.beans.BeanUtils;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Data
@@ -23,16 +24,12 @@ public class OrderItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
+    @JsonBackReference
     private Order order;
 
     protected OrderItem() {}
 
-    protected OrderItem(
-        String productName,
-        Integer qty,
-        Double price,
-        Order order
-    ) {
+    protected OrderItem(String productName, Integer qty, Double price, Order order) {
         this.productName = productName;
         this.qty = qty;
         this.price = price;
@@ -49,5 +46,11 @@ public class OrderItem {
 
     public Double getPrice() {
         return price;
+    }
+
+    public void update(String productName, Integer qty, Double price) {
+        this.productName = productName;
+        this.qty = qty;
+        this.price = price;
     }
 }
