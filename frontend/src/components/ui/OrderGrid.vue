@@ -44,10 +44,10 @@
                         <tr>
                         <th>Id</th>
                         <th>UserId</th>
-                        <th>Qty</th>
                         <th>inventoryId</th>
                         <th>OrderStatus</th>
                         <th>OrderItems</th>
+                        <th>OrderDate</th>
                         <th>Inventory</th>
                         </tr>
                     </thead>
@@ -59,13 +59,13 @@
                         >
                             <td class="font-semibold">{{ idx + 1 }}</td>
                             <td class="whitespace-nowrap" label="UserId">{{ val.userId }}</td>
-                            <td class="whitespace-nowrap" label="Qty">{{ val.qty }}</td>
                             <td class="whitespace-nowrap" label="OrderStatus">{{ val.orderStatus }}</td>
                             <td class="whitespace-nowrap" label="OrderItems">
                                 <span v-for="(name, index) in val.orderItems" :key="index">
                                     {{ name }}<br>
                                 </span>
                             </td>
+                            <td class="whitespace-nowrap" label="OrderDate">{{ val.orderDate }}</td>
                             <td class="whitespace-nowrap" label="Inventory">
                                 <InventoryId :editMode="editMode" v-model="val.inventoryId"></InventoryId>
                             </td>
@@ -132,7 +132,7 @@
                     <v-card-text>
                         <div>
                             <String label="UserId" v-model="selectedRow.userId" :editMode="true"/>
-                            <Number label="Qty" v-model="selectedRow.qty" :editMode="true"/>
+                            <Date label="OrderDate" v-model="selectedRow.orderDate" :editMode="true"/>
                             <InventoryId offline label="inventoryId" v-model="selectedRow.inventoryId" :editMode="true"/>
                             <OrderStatus offline label="OrderStatus" v-model="selectedRow.orderStatus" :editMode="true"/>
                             <OrderItemDetailGrid label="OrderItems" offline v-model="selectedRow.orderItems" :editMode="true"/>

@@ -12,4 +12,5 @@ public class PlaceOrderCommand {
     private InventoryId inventoryId;
     private OrderStatus orderStatus;
     private List<OrderItem> orderItems;
+    private Date orderDate;
 }

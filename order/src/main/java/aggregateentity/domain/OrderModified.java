@@ -13,8 +13,10 @@ public class OrderModified extends AbstractEvent {
 
     private Long id;
     private String userId;
-    private Integer qty;
     private List<OrderItem> orderItems;
+    private InventoryId inventoryId;
+    private OrderStatus orderStatus;
+    private Date orderDate;
 
     public OrderModified(Order aggregate) {
         super(aggregate);

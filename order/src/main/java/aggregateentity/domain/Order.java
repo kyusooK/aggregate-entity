@@ -26,10 +26,11 @@ public class Order  {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;    
         
-    private String userId;    
-        
-    private Integer qty;    
-        
+    private String userId;   
+    
+    private Date orderDate;
+    
+    
     @Embedded
     private InventoryId inventoryId;    
         
@@ -39,8 +40,8 @@ public class Order  {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> orderItems = new java.util.ArrayList<>();
     
-    public void addOrderItem(String productName, Double price) {
-        OrderItem orderItem = new OrderItem(productName, price, this);
+    public void addOrderItem(String productName, Integer qty, Double price) {
+        OrderItem orderItem = new OrderItem(productName, qty, price, this);
         orderItems.add(orderItem);
     }
 
@@ -48,11 +49,10 @@ public class Order  {
         return Collections.unmodifiableList(orderItems);
     }
 
-    public void updateOrderItem(Long id, String productName, Double price) {
+    public void updateOrderItem(Long id, String productName, Integer qty, Double price) {
         for (OrderItem item : orderItems) {
             if (item.getId().equals(id)) {
-                item.setProductName(productName);
-                item.setPrice(price);
+                item.update(productName, qty, price);
                 break;
             }
         }
@@ -61,17 +61,13 @@ public class Order  {
     public void removeOrderItem(OrderItem orderItem) {
         orderItems.remove(orderItem);
     }
-
-    public static OrderRepository repository(){
-        OrderRepository orderRepository = OrderApplication.applicationContext.getBean(OrderRepository.class);
-        return orderRepository;
-    }
+    
 
     //<<< Clean Arch / Port Method
     public void placeOrder(PlaceOrderCommand placeOrderCommand){
     // 현재 Order 객체에 직접 값을 설정
         this.setUserId(placeOrderCommand.getUserId());
-        this.setQty(placeOrderCommand.getQty());
+        this.setOrderDate(new Date());
         this.setInventoryId(placeOrderCommand.getInventoryId());
         this.setOrderStatus(placeOrderCommand.getOrderStatus());
         
@@ -101,10 +97,12 @@ public class Order  {
                     order.addOrderItem(item.getProductName(), item.getPrice());
                 }
             }
-            
             repository().save(order);
+
+            OrderModified orderModified = new OrderModified(this);
+            orderModified.publishAfterCommit();
         });
-    } 
-    //>>> Clean Arch / Port Method
+        
+    }
 }
 //>>> DDD / Aggregate Root
