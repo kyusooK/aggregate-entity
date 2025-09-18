@@ -1,5 +1,5 @@
 {
-  "name": "Full Stack Development Environment (No K8s)",
+  "name": "Auto Development Environment",
   "image": "mcr.microsoft.com/devcontainers/universal:2-linux",
   
   "onCreateCommand": {
@@ -20,8 +20,7 @@
         "ms-vscode.docker",
         "redhat.vscode-yaml",
         "ms-vscode.vscode-json",
-        "humao.rest-client",
-        "ms-vscode.rest-client"
+        "humao.rest-client"
       ],
       "settings": {
         "java.configuration.detectJdksAtStart": false,
